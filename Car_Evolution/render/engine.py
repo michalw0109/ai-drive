@@ -14,6 +14,7 @@ class Engine:
     WIDTH = 1500
     HEIGHT = 760
     FPS = 0
+    PATH_TO_FOLDER = "C:/Users/micha/source/python/Car_Evolution/"
     
     USE_TRACK_IMAGE = True
     
@@ -39,7 +40,7 @@ class Engine:
                     sufix = "dataModelContinuous"
                 case 3:
                     sufix = "dataModelHalfContinuous"
-            fullPath = "C:/Users/micha/source/python/Car_Evolution/evolutionOutput/bestNN" + sufix + ".txt"
+            fullPath = self.PATH_TO_FOLDER + "evolutionOutput/bestNN" + sufix + ".txt"
             self.myEvoEngine.createPopulationFromFile(fullPath)
         else:
             self.myEvoEngine.createPopulation()
@@ -254,12 +255,12 @@ class Engine:
 
         self.ax.plot(self.myEvoEngine.generationsList, self.myEvoEngine.bestFitnessList)
         self.ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))
-        fullPath = "C:/Users/micha/source/python/Car_Evolution/evolutionOutput/bestFitnessGraph" + sufix + ".png"
+        fullPath = self.PATH_TO_FOLDER + "evolutionOutput/bestFitnessGraph" + sufix + ".png"
         plt.savefig(fullPath)
         img = cv2.imread(fullPath, cv2.IMREAD_ANYCOLOR)
         cv2.imshow("Best fitness score", img)
         
-        fullDataPath = "C:/Users/micha/source/python/Car_Evolution/evolutionOutput/data" + sufix + ".txt"
+        fullDataPath = self.PATH_TO_FOLDER + "evolutionOutput/data" + sufix + ".txt"
         with open(fullDataPath, 'w') as file:
         # Write some values to the file
             for i in range(0, len(self.myEvoEngine.bestFitnessList)):

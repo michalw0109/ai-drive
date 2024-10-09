@@ -2,6 +2,8 @@ from mojeRzeczy import MyNeuralNetwork as mnn
 
 class Evolution:
     
+    PATH_TO_FOLDER = "C:/Users/micha/source/python/Car_Evolution/"
+    
     def __init__(self, POPULATIONSIZE):
         
         self.populationSize = POPULATIONSIZE
@@ -46,7 +48,7 @@ class Evolution:
                 sufix = "dataModelHalfContinuous"
                 
                 
-        fullPath = "C:/Users/micha/source/python/Car_Evolution/evolutionOutput/bestNN" + sufix + ".txt"
+        fullPath = self.PATH_TO_FOLDER + "evolutionOutput/bestNN" + sufix + ".txt"
         self.population[0].saveToFile(fullPath)
         
         best = self.population[0].fitness
