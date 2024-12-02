@@ -15,40 +15,47 @@ from PIL import Image
 
 
 
+
 def parrarel_generation(start_index, length, _myEvoEngine, _decided_car_pos, _dims: list, _dataModel, _duration):
-    # Initialize CarAI
-    os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
     
-    pygame.display.set_mode((1,1))
-
-    car_ai = CarAI(_myEvoEngine, _decided_car_pos, _dims, _dataModel, start_index, length)
-    
-    temp_track = pygame.image.load("assets/my_track2.png")        
-    temp_track = pygame.transform.scale(temp_track, (_dims[0], _dims[1]))
-
-
-    # Start timer
-    timer = 0
-
-    _is_running = True
-    while _is_running:
+    try:
+        # Kod generacji
+        # Initialize CarAI
+        os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
         
+        pygame.display.set_mode((1,1))
 
-        # Compute the next generation
-        car_ai.compute(temp_track)
-
-        # Break if all cars are dead
-        if car_ai.remaining_cars == 0:
-            break
-
-        if timer > _duration * 60:
-            break
- 
-        timer += 1
+        car_ai = CarAI(_myEvoEngine, _decided_car_pos, _dims, _dataModel, start_index, length)
         
-    
-    return start_index, [individual.fitness for individual in _myEvoEngine.population[start_index:start_index+length]]
+        temp_track = pygame.image.load("assets/my_track2.png")        
+        temp_track = pygame.transform.scale(temp_track, (_dims[0], _dims[1]))
 
+
+        # Start timer
+        timer = 0
+
+        _is_running = True
+        while _is_running:
+            
+
+            # Compute the next generation
+            car_ai.compute(temp_track)
+
+            # Break if all cars are dead
+            if car_ai.remaining_cars == 0:
+                break
+
+            if timer > _duration * 60:
+                break
+     
+            timer += 1
+            
+        
+        return start_index, [individual.fitness for individual in _myEvoEngine.population[start_index:start_index+length]]
+
+    finally:
+        pygame.quit()  # Zamknięcie pygame dla każdego procesu
+    
 
 # ------------------ CLASSES ------------------
 class Engine:
@@ -56,7 +63,7 @@ class Engine:
     WIDTH = 1500
     HEIGHT = 760
     FPS = 0
-    PATH_TO_FOLDER = "C:/Users/micha/source/python/Car_Evolution_par/"
+    PATH_TO_FOLDER = "/home/deweloper/Pulpit/ai_drive/1/Car_Evolution_par/"
     
     USE_TRACK_IMAGE = True
     
@@ -70,7 +77,13 @@ class Engine:
 
     def __init__(self, MAX_SIMULATIONS, FPS, DATA_MODEL, POPULATION_SIZE, MIN_DURATION, MAX_DURATION, READ_FROM_FILE):
         
+
+
+        
+        
         os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+
         Engine.FPS = FPS
         self.time = datetime.now().strftime("%Y.%m.%d_%H.%M.%S")
         # initializing evolution engine
@@ -177,13 +190,13 @@ class Engine:
 
         match mode:
             case 0:
-                sufix = "DataModelDiscrete"
+                sufix = "dataModelDiscrete"
             case 1:
-                sufix = "DataModelHalfDiscrete"
+                sufix = "dataModelHalfDiscrete"
             case 2:
-                sufix = "DataModelContinuous"
+                sufix = "dataModelContinuous"
             case 3:
-                sufix = "DataModelHalfContinuous"
+                sufix = "dataModelHalfContinuous"
 
 
         self.ax.plot(self.myEvoEngine.generationsList, self.myEvoEngine.bestFitnessList)
