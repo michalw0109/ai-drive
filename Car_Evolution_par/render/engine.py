@@ -27,7 +27,7 @@ def parrarel_generation(start_index, length, _myEvoEngine, _decided_car_pos, _di
 
         car_ai = CarAI(_myEvoEngine, _decided_car_pos, _dims, _dataModel, start_index, length)
         
-        temp_track = pygame.image.load("assets/my_track2.png")        
+        temp_track = pygame.image.load("assets/trasa.png")        
         temp_track = pygame.transform.scale(temp_track, (_dims[0], _dims[1]))
 
 
@@ -132,7 +132,7 @@ class Engine:
         self.track = None
 
         self.car = Car([0, 0],[self.WIDTH, self.HEIGHT])
-        self.decided_car_pos = [1100, 100]
+        self.decided_car_pos = [758, 162]
         
     
     

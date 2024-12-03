@@ -15,7 +15,7 @@ class Engine:
     WIDTH = 1500
     HEIGHT = 760
     FPS = 0
-    PATH_TO_FOLDER = "C:/Users/micha/source/python/Car_Evolution_seq/"
+    PATH_TO_FOLDER = "/home/deweloper/Pulpit/ai_drive/1/Car_Evolution_seq/"
     
     
     DEFAULT_FONT = "comicsansms"
@@ -79,7 +79,7 @@ class Engine:
         self.track = None
 
         self.car = Car([0, 0],[self.WIDTH, self.HEIGHT])
-        self.decided_car_pos = [1100, 100]
+        self.decided_car_pos = [758, 162]
         
     def handle_drawing_track(self):
         #Handles the drawing of the track
@@ -90,8 +90,8 @@ class Engine:
         if self.instruction_index == 0:
             self.is_drawing_track = False
             self.ai_can_start = True
-            self.instruction_index += 1
-            self.my_track = pygame.image.load("assets/my_track2.png")        
+            #self.instruction_index += 1
+            self.my_track = pygame.image.load("assets/trasa.png")        
             self.my_track = pygame.transform.scale(self.my_track, (Engine.WIDTH, Engine.HEIGHT))
             self.screen.blit(self.my_track, (0,0))
             self.track = self.screen.copy()
@@ -120,7 +120,8 @@ class Engine:
             self.screen.blit(self.car.sprite, (self.car.center[0], self.car.center[1]))
             
             # !!! set car position
-
+            self.decided_car_pos = [758, 162]
+            #print(self.decided_car_pos)
             
             
         
@@ -141,12 +142,12 @@ class Engine:
                             self.is_placing_start_point = True
                             self.instruction_index += 1
                             
-                            if self.USE_TRACK_IMAGE:
+                            
                                 
-                                #!!! set default track
-                                self.my_track = pygame.image.load("assets/my_track2.png")        
-                                self.my_track = pygame.transform.scale(self.my_track, (Engine.WIDTH, Engine.HEIGHT))
-                                self.screen.blit(self.my_track, (0,0))
+                            #!!! set default track
+                            self.my_track = pygame.image.load("assets/trasa.png")        
+                            self.my_track = pygame.transform.scale(self.my_track, (Engine.WIDTH, Engine.HEIGHT))
+                            self.screen.blit(self.my_track, (0,0))
 
                             
                             
@@ -257,13 +258,13 @@ class Engine:
 
         match mode:
             case 0:
-                sufix = "DataModelDiscrete"
+                sufix = "dataModelDiscrete"
             case 1:
-                sufix = "DataModelHalfDiscrete"
+                sufix = "dataModelHalfDiscrete"
             case 2:
-                sufix = "DataModelContinuous"
+                sufix = "dataModelContinuous"
             case 3:
-                sufix = "DataModelHalfContinuous"
+                sufix = "dataModelHalfContinuous"
 
 
         self.ax.plot(self.myEvoEngine.generationsList, self.myEvoEngine.bestFitnessList)
@@ -271,17 +272,17 @@ class Engine:
         fullPath = self.PATH_TO_FOLDER + "evolutionOutput/"+ sufix + "_" + self.time + "/" + "bestFitnessGraph.png"
         
         plt.savefig(fullPath)
-        img = cv2.imread(fullPath, cv2.IMREAD_ANYCOLOR)
-        cv2.imshow("Best fitness score", img)
+        #img = cv2.imread(fullPath, cv2.IMREAD_ANYCOLOR)
+        #cv2.imshow("Best fitness score", img)
         
-        fullDataPath = self.PATH_TO_FOLDER + "evolutionOutput/"+ sufix +"_"+ self.time+ "/" + "graphData.txt"
-        with open(fullDataPath, 'w') as file:
+        #fullDataPath = self.PATH_TO_FOLDER + "evolutionOutput/"+ sufix +"_"+ self.time+ "/" + "graphData.txt"
+        #with open(fullDataPath, 'w') as file:
         # Write some values to the file
-            for i in range(0, len(self.myEvoEngine.bestFitnessList)):
-                file.write(str(self.myEvoEngine.generationsList[i]))
-                file.write(" ")
-                file.write(str(self.myEvoEngine.bestFitnessList[i]))
-                file.write("\n")
+        #    for i in range(0, len(self.myEvoEngine.bestFitnessList)):
+        #        file.write(str(self.myEvoEngine.generationsList[i]))
+        #        file.write(" ")
+        #        file.write(str(self.myEvoEngine.bestFitnessList[i]))
+        #        file.write("\n")
 
         
         

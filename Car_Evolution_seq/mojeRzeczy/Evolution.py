@@ -3,7 +3,7 @@ from mojeRzeczy import MyNeuralNetwork as mnn
 
 class Evolution:
     
-    PATH_TO_FOLDER = "C:/Users/micha/source/python/Car_Evolution_seq/"
+    PATH_TO_FOLDER = "/home/deweloper/Pulpit/ai_drive/1/Car_Evolution_seq/"
     
     def __init__(self, POPULATIONSIZE, TIME):
         

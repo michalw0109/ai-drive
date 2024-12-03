@@ -5,7 +5,7 @@ import numpy as np
 
 # ------------------ GLOBAL VARIABLES ------------------
 
-MAX_SIMULATIONS = 100
+MAX_SIMULATIONS = 500
 FPS = 3000
 # 0 - dataModelDiscrete
 # 1 - dataModelHalfDiscrete
@@ -13,10 +13,10 @@ FPS = 3000
 # 3 - dataModelHalfContinuous
 DATA_MODEL = 3
 POPULATION_SIZE = 100
-MIN_DURATION = 10
-MAX_DURATION = 20
+MIN_DURATION = 200
+MAX_DURATION = 50
 
-READ_FROM_FILE = False
+READ_FROM_FILE = True
 
 # ------------------ MAIN FUNCTION ------------------
 
